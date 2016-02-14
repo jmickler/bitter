@@ -23,4 +23,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function bleets()
+    {
+        return $this->hasMany('App\Bleets');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany('App\bleet_user');
+    }
 }
