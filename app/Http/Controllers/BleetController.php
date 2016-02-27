@@ -35,7 +35,7 @@ class BleetController extends Controller
     public function store(Request $request)
     {
         $bleet = new \App\Bleet;
-        $bleet->user_id = $request->user_id;
+        $bleet->user_id = \Auth::user()->id;
         $bleet->save();
 
         return $bleet;
