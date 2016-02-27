@@ -16,7 +16,7 @@ class CreateBleetsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned()->nullable();
-            $table->string('text', 350);
+            $table->text('content', 350);
         });
     }
 

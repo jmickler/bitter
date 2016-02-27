@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bleets extends Model
+class Bleet extends Model
 {
     public function user()
     {

@@ -8,7 +8,7 @@ class bleet_user extends Model
 {
     public function bleets()
     {
-        return $this->belongTo('App\Bleets');
+        return $this->belongTo('App\Bleet');
     }
 
     public function users()

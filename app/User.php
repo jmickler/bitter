@@ -26,7 +26,7 @@ class User extends Authenticatable
 
     public function bleets()
     {
-        return $this->hasMany('App\Bleets');
+        return $this->hasMany('App\Bleet');
     }
 
     public function likes()
