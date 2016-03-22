@@ -16,7 +16,7 @@ class BleetController extends Controller
      */
     public function index()
     {
-        return \App\Bleet::all();
+        return \App\Bleet::orderBy('id', 'desc')->get();
     }
 
     /**
@@ -73,8 +73,11 @@ class BleetController extends Controller
     public function update(Request $request, $id)
     {
         $bleet = \App\Bleet::find($id);
-        $bleet->user_id = $request->user_id;
+        if ($bleet->user_id = \Auth::user()->id) {
         $bleet->save();
+    } else {
+        return response("Unauthorized", 403);
+    }
         
         return $bleet;
     }
@@ -87,8 +90,12 @@ class BleetController extends Controller
      */
     public function destroy($id)
     {
-       $bleet = \App\Bleet::find($id);
+        $bleet = \App\Bleet::find($id);
+        if ($comment->user_id == \Auth::user()->id) {
         $bleet->delete();
+    } else {
+        return response("Unauthorized", 403);
+    }
         return $bleet;
     }
 }

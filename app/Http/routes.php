@@ -11,7 +11,9 @@
 |
 */
 
-
+Route::get('/', function () {
+    return view('welcome');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -24,24 +26,22 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('bleets', 'BleetController', [
-	'only' => ['index', 'show']
-	]);
-
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    // this is where our app lives -kevin 
     Route::get('/home', 'HomeController@index');
 
-    Route::resource('bleets', 'BleetController', [
-	'except' => ['edit', 'create']
-	]);
+    Route::group(['prefix' => 'api'], function () {
+        Route::resource('bleets', 'BleetsController', [
+            'only' => ['index', 'show']
+        ]);
 
+
+        Route::group(['middleware' => 'auth'], function () {
+            Route::resource('bleets', 'BleetsController', [
+                'only' => ['store', 'update', 'destroy']
+            ]);
+        });
+    });
 });
